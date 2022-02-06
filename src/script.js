@@ -1,3 +1,8 @@
+//Improve the project including the search engine,
+//API integration, unit conversion, wind speed,
+//weather description, and weather icon are mandatory.
+//The project should not include the forecast yet.
+
 let now = new Date();
 
 let h2 = document.querySelector("#time");
@@ -40,8 +45,11 @@ function formatDate(date) {
 
 h2.innerHTML = formatDate(now);
 
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit);
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-text-input").value;
+  search(city);
+}
 
 function search(city) {
   let apiKey = "4c79603c64bb67feda54171198de3279";
@@ -50,21 +58,18 @@ function search(city) {
   axios.get(apiUrl).then(displayWeatherByCity);
 }
 
-function handleSubmit(event) {
-  debugger;
-  event.preventDefault();
-  let city = document.querySelector("#search-text-input").value;
-  search(city);
-}
-
 function displayWeatherByCity(response) {
   console.log(response);
-  document.querySelector("h1").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
+  let temperatureElement = document.querySelector("#temperature");
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let 
+
+  celcuisTemperature = response.data.main.temp;
+
+  temperatureElement.innerHTML = Math.round(celcuisTemperature);
+  cityElement.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
 }
 
 //function searchCity(cityName) {
@@ -110,25 +115,35 @@ function getCurrentPosition(event) {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celcuisTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelciusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = docuement.querySelector("#temperature");
+  celciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+}
+
 let currentLocationButton = document.querySelector("#button-current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
-//function changeToCelcius(event) {
-//event.preventDefault;
-//let toFahrenheit = document.querySelector("#temperature");
-//toFahrenheit.innerHTML = "17";
-//}
+let celcuisTemperature = null;
 
-//let clickToCelcius = document.querySelector("#celciusLink");
-//clickToCelcius.addEventListener("click", changeToCelcius);
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
-//function changeToFahrenheit(event) {
-//event.preventDefault;
-//let toFahrenheit = document.querySelector("#temperature");
-//toFahrenheit.innerHTML = "63";
-//}
+let celciusLink = document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", displayCelciusTemperature);
 
-//let clickToFahrenheit = document.querySelector("#fahrenheitLink");
-//clickToFahrenheit.addEventListener("click", changeToFahrenheit);
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
 
 search("Paris");
