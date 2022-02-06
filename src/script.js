@@ -65,9 +65,9 @@ function displayWeatherByCity(response) {
   let dateElement = document.querySelector("#time");
   let iconElement = document.querySelector("#icon");
 
-  celcuisTemperature = response.data.main.temp;
+  celciusTemperature = response.data.main.temp;
 
-  temperatureElement.innerHTML = Math.round(celcuisTemperature);
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
@@ -127,22 +127,22 @@ function displayFahrenheitTemperature(event) {
   let temperatureElement = document.querySelector("#temperature");
   celciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celcuisTemperature * 9) / 5 + 32;
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 function displayCelciusTemperature(event) {
   event.preventDefault();
-  let temperatureElement = docuement.querySelector("#temperature");
+  let temperatureElement = document.querySelector("#temperature");
   celciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   temperatureElement.innerHTML = Math.round(celciusTemperature);
 }
 
+let celciusTemperature = null;
+
 let currentLocationButton = document.querySelector("#button-current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
-
-let celcuisTemperature = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
