@@ -36,8 +36,12 @@ img {
   left: -18px;
 }
 
-.open-source {
+footer {
   font-size: 15px;
+  margin: 4px;
+  position: relative;
+  margin: 20px auto;
+  max-width: 700px;
 }
 
 .link {
@@ -53,16 +57,6 @@ img {
 
 .enterCity {
   margin: 10px 0 5px 0;
-}
-
-.sunCovered {
-  font-size: 60px;
-  display: inline;
-}
-
-.sunCovered.small,
-.sun {
-  font-size: 30px;
 }
 
 #button-current-location {
