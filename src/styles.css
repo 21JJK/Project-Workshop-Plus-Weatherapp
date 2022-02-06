@@ -33,7 +33,7 @@ ul {
 img {
   position: relative;
   top: -10px;
-  left: -20px;
+  left: -18px;
 }
 
 .open-source {
@@ -69,12 +69,26 @@ img {
   margin-bottom: 10px;
 }
 
+#temperature {
+  position: relative;
+  left: -20px;
+}
+
 #celcius-link {
+  position: relative;
+  left: -20px;
   text-decoration: none;
   color: black;
 }
 
+#seperation {
+  position: relative;
+  left: -20px;
+}
+
 #fahrenheit-link {
+  position: relative;
+  left: -20px;
   text-decoration: none;
   color: black;
 }
