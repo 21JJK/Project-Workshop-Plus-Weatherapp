@@ -1,17 +1,16 @@
-//Improve the project including the search engine,
-//API integration, unit conversion, wind speed,
-//weather description, and weather icon are mandatory.
-//The project should not include the forecast yet.
+//unit conversion
 
 let now = new Date();
 
-let h2 = document.querySelector("#time");
-
 function formatDate(date) {
-  let currentDate = now.getDate();
   let currentHours = now.getHours();
+  if (currentHours < 10) {
+    currentHours = `0${currentHours}`;
+  }
   let currentMinutes = now.getMinutes();
-  let currentYear = now.getFullYear();
+  if (currentMinutes < 10) {
+    currentMinutes = `0${currentMinutes}`;
+  }
 
   let days = [
     "Sunday",
@@ -24,26 +23,24 @@ function formatDate(date) {
   ];
   let currentDay = days[now.getDay()];
 
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  let currentMonth = months[now.getMonth()];
+  //let months = [
+  //"January",
+  //"February",
+  //"March",
+  //"April",
+  //"May",
+  //"June",
+  //"July",
+  //"August",
+  //"September",
+  //"October",
+  //"November",
+  //"December",
+  //];
+  //let currentMonth = months[now.getMonth()];
 
-  return `${currentDay}, ${currentDate}. ${currentMonth} ${currentYear}, ${currentHours}:${currentMinutes}`;
+  return `${currentDay}, ${currentHours}:${currentMinutes}`;
 }
-
-h2.innerHTML = formatDate(now);
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -63,13 +60,23 @@ function displayWeatherByCity(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
-  let 
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let dateElement = document.querySelector("#time");
+  let iconElement = document.querySelector("#icon");
 
   celcuisTemperature = response.data.main.temp;
 
   temperatureElement.innerHTML = Math.round(celcuisTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 //function searchCity(cityName) {

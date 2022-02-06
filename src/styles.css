@@ -30,6 +30,12 @@ ul {
   margin: 50px;
 }
 
+img {
+  position: relative;
+  top: -10px;
+  left: -20px;
+}
+
 .open-source {
   font-size: 15px;
 }
