@@ -1,5 +1,3 @@
-//unit conversion
-
 let now = new Date();
 
 function formatDate(date) {
